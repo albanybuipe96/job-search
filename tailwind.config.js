@@ -11,6 +11,9 @@ export default {
         'brand-gray-1': '#dadce0',
         'brand-blue-1': '#1967a2',
         'brand-green-1': '#137333'
+      },
+      boxShadow: {
+        blue: '0 0 1px 1px #4285f4'
       }
     }
   },
