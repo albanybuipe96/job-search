@@ -6,6 +6,11 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Open sans', ...defaultTheme.fontFamily.sans]
+      },
+      colors: {
+        'brand-gray-1': '#dadce0',
+        'brand-blue-1': '#1967a2',
+        'brand-green-1': '#137333'
       }
     }
   },
