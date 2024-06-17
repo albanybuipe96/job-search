@@ -11,8 +11,8 @@
           </ul>
         </nav>
         <div class="ml-auto flex h-full items-center py-2.5">
-          <action-button />
-          <profile-image />
+          <profile-image @click="logout" v-if="isLoggedIn" />
+          <action-button @click="login" v-else />
         </div>
       </div>
     </div>
@@ -32,6 +32,7 @@ export default {
     return {
       company: 'Nexus Careers',
       url: 'https://careers.google.com',
+      isLoggedIn: false,
       menu: [
         { name: 'Teams', url: '' },
         { name: 'Locations', url: '' },
@@ -40,6 +41,14 @@ export default {
         { name: 'Students', url: '' },
         { name: 'Jobs', url: 'https://careers.google.com' }
       ]
+    }
+  },
+  methods: {
+    login() {
+      this.isLoggedIn = true
+    },
+    logout() {
+      this.isLoggedIn = false
     }
   }
 }
