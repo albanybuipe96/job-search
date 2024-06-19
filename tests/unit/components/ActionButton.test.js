@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/vue'
 
-import ActionButton from '@/components/widgets/ActionButton.vue'
+import ActionButton from '@/components/shared/ActionButton.vue'
 // import userEvent from '@testing-library/user-event'
 
 describe('ActionButton', () => {

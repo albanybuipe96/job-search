@@ -29,13 +29,13 @@ export default {
 
 <style scoped>
 button {
-  @apply rounded px-5 py-3 font-medium transition-all duration-700;
+  @apply px-5 py-3 font-medium transition-all duration-700;
 }
 
 .primary {
-  @apply bg-brand-blue-1 hover:bg-brand-blue-2 border-0 text-white;
+  @apply rounded bg-brand-blue-1 text-white hover:bg-brand-blue-2;
 }
 .secondary {
-  @apply text-brand-blue-1 hover:bg-brand-blue-2 bg-transparent hover:text-white;
+  @apply bg-transparent text-brand-blue-1 hover:bg-brand-blue-2 hover:text-white;
 }
 </style>
