@@ -1,20 +1,31 @@
 <template>
-  <header class="w-full text-sm">
+  <header :class="['w-full', 'text-sm', headerHeightClass]">
     <div class="fixed left-0 top-0 h-16 w-full bg-white">
-      <div class="border-brand-gray-1 mx-auto flex h-full flex-nowrap border-b border-solid px-8">
-        <a :href="url" class="flex h-full items-center text-xl">{{ company }}</a>
+      <div
+        class="mx-auto flex h-full flex-nowrap border-b border-solid border-brand-gray-1 px-8 py-1"
+      >
+        <a
+          :href="url"
+          class="flex h-full items-center px-1 text-xl transition-all duration-500 hover:text-brand-blue-1"
+          >{{ company }}</a
+        >
         <nav class="ml-12 h-full">
           <ul class="flex h-full list-none">
-            <li class="ml-9 h-full first:ml-0" v-for="option in menu" :key="option.name">
-              <a :href="option.url" class="flex h-full items-center py-2.5">{{ option.name }}</a>
+            <li v-for="option in menu" :key="option.name" class="ml-4 h-full first:ml-0">
+              <a
+                :href="option.url"
+                class="mb-1 flex h-full items-center rounded-md bg-center px-2 py-2.5 transition-all duration-300 hover:text-brand-blue-2"
+                >{{ option.name }}</a
+              >
             </li>
           </ul>
         </nav>
         <div class="ml-auto flex h-full items-center py-2.5">
-          <profile-image @click="logout" v-if="isLoggedIn" />
-          <action-button @click="login" :primary="false" text="Sign in" v-else />
+          <profile-image v-if="isLoggedIn" @click="logout" />
+          <action-button v-else type="primary" text="Sign in" @click="login" />
         </div>
       </div>
+      <sub-nav v-if="isLoggedIn" />
     </div>
   </header>
 </template>
@@ -22,11 +33,13 @@
 <script>
 import ActionButton from '@/components/widgets/ActionButton.vue'
 import ProfileImage from './widgets/ProfileImage.vue'
+import SubNav from './widgets/SubNav.vue'
 export default {
   name: 'MainNav',
   components: {
     ActionButton,
-    ProfileImage
+    ProfileImage,
+    SubNav
   },
   data() {
     return {
@@ -41,6 +54,14 @@ export default {
         { name: 'Students', url: '' },
         { name: 'Jobs', url: 'https://careers.google.com' }
       ]
+    }
+  },
+  computed: {
+    headerHeightClass() {
+      return {
+        'h-32': this.isLoggedIn,
+        'h-16': !this.isLoggedIn
+      }
     }
   },
   methods: {

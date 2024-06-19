@@ -1,17 +1,25 @@
 import { render, screen } from '@testing-library/vue'
 import userEvent from '@testing-library/user-event'
-import MainVue from '@/components/MainNav.vue'
-import { expect } from 'vitest'
 import MainNav from '@/components/MainNav.vue'
+import { expect } from 'vitest'
 
 describe('MainNav', () => {
+  const renderMainNav = () => {
+    render(MainNav, {
+      global: {
+        stubs: {
+          FontAwesomeIcon: true
+        }
+      }
+    })
+  }
   it('displays compnay name', () => {
-    render(MainVue)
+    renderMainNav()
     const companyName = screen.getByText('Nexus Careers')
     expect(companyName).toBeInTheDocument()
   })
   it('displays menu items for navigation', () => {
-    render(MainVue)
+    renderMainNav()
     const navMenu = screen.getAllByRole('listitem')
     const navItems = navMenu.map((item) => item.textContent)
     expect(navItems).toEqual([
@@ -25,7 +33,7 @@ describe('MainNav', () => {
   })
   describe('when user logs in', () => {
     it('displays profile image', async () => {
-      render(MainNav)
+      renderMainNav()
       let profileImage = screen.queryByRole('img', {
         name: /user profile image/i
       })
@@ -44,7 +52,7 @@ describe('MainNav', () => {
   })
   describe('when user logs out', () => {
     it('displays sign in button', async () => {
-      render(MainNav)
+      renderMainNav()
 
       let signInBtn = screen.getByRole('button', { name: /Sign in/i })
       expect(signInBtn).toBeInTheDocument()
