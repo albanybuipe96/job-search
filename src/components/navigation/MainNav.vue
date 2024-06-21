@@ -4,18 +4,18 @@
       <div
         class="mx-auto flex h-full flex-nowrap border-b border-solid border-brand-gray-1 px-8 py-1"
       >
-        <a
-          :href="url"
+        <router-link
+          :to="{ name: 'Home' }"
           class="flex h-full items-center px-1 text-xl transition-all duration-500 hover:text-brand-blue-1"
-          >{{ company }}</a
+          >Nexus Careers</router-link
         >
         <nav class="ml-12 h-full">
           <ul class="flex h-full list-none">
             <li v-for="option in menu" :key="option.name" class="ml-4 h-full first:ml-0">
-              <a
-                :href="option.url"
+              <router-link
+                :to="option.url"
                 class="mb-1 flex h-full items-center rounded-md bg-center px-2 py-2.5 transition-all duration-300 hover:text-brand-blue-2"
-                >{{ option.name }}</a
+                >{{ option.name }}</router-link
               >
             </li>
           </ul>
@@ -25,7 +25,7 @@
           <action-button v-else type="primary" text="Sign in" @click="login" />
         </div>
       </div>
-      <sub-nav v-if="isLoggedIn" />
+      <sub-nav v-if="showSubNav" />
     </div>
   </header>
 </template>
@@ -43,16 +43,14 @@ export default {
   },
   data() {
     return {
-      company: 'Nexus Careers',
-      url: 'https://careers.google.com',
       isLoggedIn: false,
       menu: [
-        { name: 'Teams', url: '' },
-        { name: 'Locations', url: '' },
-        { name: 'Life at Nexus Careers', url: '' },
-        { name: 'How we hire', url: '' },
-        { name: 'Students', url: '' },
-        { name: 'Jobs', url: 'https://careers.google.com' }
+        { name: 'Teams', url: '/' },
+        { name: 'Locations', url: '/' },
+        { name: 'Life at Nexus Careers', url: '/' },
+        { name: 'How we hire', url: '/' },
+        { name: 'Students', url: '/' },
+        { name: 'Jobs', url: '/jobs/results' }
       ]
     }
   },
@@ -62,6 +60,9 @@ export default {
         'h-32': this.isLoggedIn,
         'h-16': !this.isLoggedIn
       }
+    },
+    showSubNav() {
+      return this.isLoggedIn // && this.$route.path === '/jobs/results'
     }
   },
   methods: {

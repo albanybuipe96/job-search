@@ -3,20 +3,27 @@ import SubNav from '@/components/navigation/SubNav.vue'
 import { describe } from 'vitest'
 
 describe('SubNav', () => {
+  const renderSubNav = (routeName) => {
+    render(SubNav, {
+      global: {
+        mocks: {
+          $route: { name: routeName }
+        },
+        stubs: {
+          FontAwesomeIcon: true
+        }
+      },
+      data() {
+        return {
+          isOnJobsPage: true
+        }
+      }
+    })
+  }
   describe('when user on jobs page', () => {
     it('displays jobs count', () => {
-      render(SubNav, {
-        global: {
-          stubs: {
-            FontAwesomeIcon: true
-          }
-        },
-        data() {
-          return {
-            isOnJobsPage: true
-          }
-        }
-      })
+      const routeName = 'JobResults'
+      renderSubNav(routeName)
       const jobsCount = screen.getByText('1653')
       expect(jobsCount).toBeInTheDocument()
     })
@@ -24,18 +31,8 @@ describe('SubNav', () => {
 
   describe('when user is not on jobs page', () => {
     it('does not display jobs count', () => {
-      render(SubNav, {
-        global: {
-          stubs: {
-            FontAwesomeIcon: true
-          }
-        },
-        data() {
-          return {
-            isOnJobsPage: false
-          }
-        }
-      })
+      const routeName = 'Home'
+      renderSubNav(routeName)
       const jobsCount = screen.queryByText('1653')
       expect(jobsCount).not.toBeInTheDocument()
     })
