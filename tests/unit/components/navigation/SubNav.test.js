@@ -20,7 +20,7 @@ describe('SubNav', () => {
       }
     })
   }
-  describe('when user on jobs page', () => {
+  describe('when user is on jobs page', () => {
     it('displays jobs count', () => {
       const routeName = 'JobResults'
       renderSubNav(routeName)
